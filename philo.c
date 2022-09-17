@@ -14,17 +14,21 @@
 
 pthread_mutex_t	mutex;
 
-void*	live()
+void	*live(void *arg)
 {
+	int i;
+
+	i = *(int*)arg;
 	pthread_mutex_lock(&mutex);
-	printf("Philo took a fork\n");
-	printf("Eat\n");
-	printf("Philo put fork on the table\n");
-	printf("Sleep\n");
+	printf("Philo %i took a fork\n", i);
+	printf("Philo %i is eating spaggetti\n", i);
+	printf("Philo %i put fork back on the table\n", i);
+	printf("Philo %i is sleeping\n", i);
+	printf("Philo %i is thinking\n", i);
 	pthread_mutex_unlock(&mutex);
 }
 
-void*	create_philo(int nop)
+void	*create_philo(int nop)
 {
 	pthread_t	philo[nop];
 	pthread_mutex_init(&mutex, NULL);
@@ -34,7 +38,7 @@ void*	create_philo(int nop)
 	while (i < nop)
 	{
 		printf("Philo %i created!\n", i);
-		pthread_create(philo + i, NULL, &live, NULL);
+		pthread_create(philo + i, NULL, &live, &i);
 		i++;
 	}
 	i = 0;
