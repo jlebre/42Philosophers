@@ -6,42 +6,39 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/18 17:09:41 by admin             #+#    #+#              #
-#    Updated: 2022/09/16 22:22:07 by marvin           ###   ########.fr        #
+#    Updated: 2022/09/17 03:04:35 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 RM = @rm -fr
-FLAGS = -Wall -Werror -Wextra -fsanitize=address
+FLAGS = -Wall -Wextra -fsanitize=address -pthread
+#-Werror
 
 NAME = philo
+
+INCLUDE = .
 
 SRC = philo.c
 
 OBJ = $(SRC:.c=.o)
 
-HEADER = philo.h
+all: $(NAME) clean
 
-LIB = .
-
-all: $(NAME)
-
-$(NAME): $(OBJ) $(HEADER)
-	@$(CC) $(OBJ) $(FLAGS) -I$(LIB) -o $(NAME)
-	@echo "\033[0;32mPush_swap Compiled!\033[0m"
+$(NAME): $(OBJ) $(INCLUDE)
+	@$(CC) $(OBJ) $(FLAGS) -o $(NAME)
+	@echo "\033[0;32mPhilo Compiled!\033[0m"
 
 .c.o:
-	@$(CC) $(FLAGS) -I$(LIB) -c $< -o $(<:.c=.o)
+	@$(CC) $(FLAGS) -I$(INCLUDE) -c $< -o $(<:.c=.o)
 
 clean:
 	$(RM) $(OBJ)
-	@$(MAKE) clean -C
 	@echo "\033[0;31m.o Files Removed!\033[0m"
 
 fclean: clean
 	$(RM) $(NAME) 
-	@$(MAKE) fclean -C
-	@echo "\033[0;31mPush_swap Removed!\033[0m"
+	@echo "\033[0;31mPhilo Removed!\033[0m"
 
 re: fclean all
 
