@@ -14,6 +14,15 @@
 
 pthread_mutex_t	mutex;
 
+void sleep()
+
+void	*rotine(void *arg)
+{
+	eat(void);
+	sleep();
+	think(void);
+}
+
 void	*live(void *arg)
 {
 	int i;
@@ -51,31 +60,46 @@ void	*create_philo(int nop)
 	pthread_mutex_destroy(&mutex);
 }
 
+int	start_args(char **argv, t_args *args);
+{
+	args.number_of_philo = ft_atoi(argv[1]);
+	args.time_to_die = ft_atoi(argv[2]);
+	args.time_to_eat = ft_atoi(argv[3]);
+	args.time_to_sleep = ft_atoi(argv[4]);
+	if (args.number_of_philo <= 0 || args.time_to_die < 0
+		|| args.time_to_eat < 0 || args.time_to_sleep < 0)
+		return (1);
+	if (argc == 6)
+	{
+		args.number_of_meals = ft_atoi(argv[5]);
+		if (args.number_of_meals <= 0)
+			return (1);
+	}
+	args.start_time = gettimeofday();
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
-	int nop;
-	/*
-	int	forks;
-	int	ttd;
-	int	tte;
-	int	tts;
-	*/
+	t_args	args;
 
-	if (argc < 5)
+	if (argc < 2)
 		return (0);
-	nop = atoi(argv[1]);
-	/*
-	forks = nop;
-	ttd = atoi(argv[2]);
-	tte = atoi(argv[3]);
-	tts = atoi(argv[4]);
-	*/
-
-	create_philo(nop);
+	if (start_args(argv, &args))
+		return (0);
+	create_philo(args.number_of_philo);
 	return (0);
 }
 
 //MUTEX FORKS
+
+/* MESSAGES
+printf("%i Philo %i has taken a fork\n", time, philo);
+printf("%i Philo %i is eating\n", time, philo);
+printf("%i Philo %i is sleeping\n", time, philo);
+printf("%i Philo %i is thinking\n", time, philo);
+printf("%i Philo %i died\n", time, philo);
+*/
 
 /*
 number_of_philosophers

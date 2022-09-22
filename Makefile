@@ -6,20 +6,20 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/18 17:09:41 by admin             #+#    #+#              #
-#    Updated: 2022/09/17 03:04:35 by marvin           ###   ########.fr        #
+#    Updated: 2022/09/21 18:39:10 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 RM = @rm -fr
-FLAGS = -Wall -Wextra -fsanitize=address -pthread
-#-Werror
+FLAGS = -Wall -Wextra -pthread
+#-Werror -fsanitize=address
 
 NAME = philo
 
 INCLUDE = .
 
-SRC = philo.c
+SRC = philo.c ft_atoi.c
 
 OBJ = $(SRC:.c=.o)
 
