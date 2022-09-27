@@ -18,27 +18,59 @@ t_args	*args(void)
 	return (&args);
 }
 
-pthread_mutex_t *mut(void)
+t_args	*philos(void)
 {
-	static pthread_mutex_t	mutex;
-	return (&mutex);
+	static t_args	philos;
+	return (&philos);
+}
+
+long long time_ms()
+{
+	struct timeval	tv;
+	long long		sec;
+	long long		usec;
+
+	gettimeofday(&tv, NULL);
+	sec = tv.tv_sec - args()->s_time.tv_sec;
+	usec = tv.tv_usec - args()->s_time.tv_usec;
+	return ((usec / 1000) + (sec * 1000));
+}
+
+int	check_fork(int nb)
+{
+	return (1);
 }
 
 void	eat(int nb)
 {
-	printf(" Philo %i has taken a fork\n", nb);
-	printf(" Philo %i is eating\n", nb);
-
+	if (check_fork(nb))
+	{
+		//pthread_mutex_lock(mut());
+		printf("%lli %i has taken a fork\n", time_ms(), nb);
+		printf("%lli %i is eating\n", time_ms(), nb);
+		usleep(args()->time_to_eat);
+		args()->temp = args()->time_to_die;
+		//pthread_mutex_unlock(mut());
+	}
+	else
+	{
+		while (args()->temp != 0)
+		{
+			eat(nb);
+			args()->temp--;
+		}
+	}
 }
 
 void	dorme(int nb)
 {
-	printf(" Philo %i is sleeping\n", nb);
+	printf("%lli %i is sleeping\n", time_ms(), nb);
+	usleep(args()->time_to_sleep);
 }
 
 void	think(int nb)
 {
-	printf(" Philo %i is thinking\n", nb);
+	printf("%lli %i is thinking\n", time_ms(), nb);
 }
 
 void	*routine(void *arg)
@@ -46,52 +78,32 @@ void	*routine(void *arg)
 	int i;
 
 	i = *(int*)arg;
+	//pthread_mutex_init(mut(), NULL);
 	eat(i);
 	dorme(i);
 	think(i);
 	//If !Eat:
-	printf(" Philo %i died\n", time, i);
+	//printf("%i died\n", time, i);
+	//pthread_mutex_destroy(mut());
 }
-
-/*
-void	*live(void *arg)
-{
-	int i;
-
-	i = *(int*)arg;
-	pthread_mutex_lock(&mutex);
-	printf("Philo %i took a fork\n", i);
-	printf("Philo %i is eating spaggetti\n", i);
-	printf("Philo %i put fork back on the table\n", i);
-	printf("Philo %i is sleeping\n", i);
-	printf("Philo %i is thinking\n", i);
-	pthread_mutex_unlock(&mutex);
-}
-*/
-
-/*
-	pthread_mutex_init(mut(), NULL);
-	pthread_mutex_destroy(mut());
-
-*/
 
 void	*create_philo(int nop)
 {
-	pthread_t	philo[nop];
+	pthread_t	philo[nop++];
 	int			i;
 
 	i = 1;
-	while (i < (nop + 1))
+	while (i < nop)
 	{
-		printf("Philo %i created!\n", i);
 		pthread_create(philo + i, NULL, &routine, &i);
+		printf("%lli %i created!\n", time_ms(), i);
 		i++;
 	}
 	i = 1;
-	while (i < (nop + 1))
+	while (i < nop)
 	{
-		printf("Philo %i died!\n", i);
 		pthread_join(philo[i], NULL);
+		printf("%lli %i died!\n", time_ms(), i);
 		i++;
 	}
 }
@@ -111,6 +123,8 @@ int	start_args(int argc, char **argv)
 		if (args()->number_of_meals <= 0)
 			return (0);
 	}
+	
+	args()->temp = args()->time_to_die;
 	//args()->start_time = gettimeofday();
 	return (1);
 }
@@ -126,6 +140,7 @@ int main(int argc, char **argv)
 }
 
 //MUTEX FORKS
+//Check if dead inside and outside
 
 /*
 number_of_philosophers
