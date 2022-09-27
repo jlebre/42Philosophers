@@ -3,23 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/18 17:09:41 by admin             #+#    #+#              #
-#    Updated: 2022/09/21 18:39:10 by marvin           ###   ########.fr        #
+#    Updated: 2022/09/27 15:51:09 by jlebre           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 RM = @rm -fr
-FLAGS = -Wall -Wextra -pthread
-#-Werror -fsanitize=address
+FLAGS = -Wall -Werror -Wextra -pthread
+#-fsanitize=address
 
 NAME = philo
 
 INCLUDE = .
 
-SRC = philo.c ft_atoi.c
+SRC = philo.c start_args.c create_philo.c routine.c time.c ft_atoi.c
 
 OBJ = $(SRC:.c=.o)
 

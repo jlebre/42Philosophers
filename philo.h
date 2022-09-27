@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:16 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/26 17:56:48 by marvin           ###   ########.fr       */
+/*   Updated: 2022/09/27 14:49:45 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,27 @@ typedef struct s_args
     t_philo *philos;
 }   t_args;
 
+//STRUCTS
+t_args	*args(void);
+t_args	*philos(void);
+
+//START ARGS
+int	start_args(int argc, char **argv);
+
+//CREATE PHILO
+void	*create_philo(int nop);
+
+//ROUTINE
+void	*routine(void *arg);
+void	think(int nb);
+void	dorme(int nb);
+void	eat(int nb);
+int	check_fork(int nb);
+
+//TIME
+long long time_ms();
+
+//ATOI
 int	ft_atoi(const char *str);
 
 #endif
