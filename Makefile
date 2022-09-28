@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/18 17:09:41 by admin             #+#    #+#              #
-#    Updated: 2022/09/27 15:51:09 by jlebre           ###   ########.fr        #
+#    Updated: 2022/09/28 01:41:38 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ NAME = philo
 
 INCLUDE = .
 
-SRC = philo.c start_args.c create_philo.c routine.c time.c ft_atoi.c
+SRC = philo.c start_args.c create_philo.c routine.c \
+	time.c is_dead.c ft_atoi.c
 
 OBJ = $(SRC:.c=.o)
 

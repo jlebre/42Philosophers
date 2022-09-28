@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:41:38 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/27 16:23:32 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/09/28 01:18:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	start_args(int argc, char **argv)
 {
-    struct timeval	tv;
-    
 	args()->number_of_philo = ft_atoi(argv[1]);
 	args()->time_to_die = ft_atoi(argv[2]);
 	args()->time_to_eat = ft_atoi(argv[3]);
@@ -31,6 +29,6 @@ int	start_args(int argc, char **argv)
 	}
 	
 	args()->temp = args()->time_to_die;
-	args()->start_time = gettimeofday(&tv, NULL);
+	args()->start_time = time_ms();
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:48:57 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/27 14:49:21 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/09/28 01:22:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,9 @@ long long time_ms()
 	sec = tv.tv_sec - args()->s_time.tv_sec;
 	usec = tv.tv_usec - args()->s_time.tv_usec;
 	return ((usec / 1000) + (sec * 1000));
+}
+
+long long	current_time()
+{
+	return (time_ms() - args()->start_time);
 }
