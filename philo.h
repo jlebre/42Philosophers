@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:16 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/29 17:52:17 by marvin           ###   ########.fr       */
+/*   Updated: 2022/09/29 18:21:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <sys/time.h> 
 # include <pthread.h>
 # include <bits/pthreadtypes.h>
+
+# define INT_MAX    2147483647
+# define INT_MIN    -2147483648
 
 //Struct for Philo
 
@@ -62,6 +65,11 @@ t_args	*philos(void);
 //START ARGS
 int	start_args(int argc, char **argv);
 
+//CHECK
+int	check(char **argv);
+int	check_limits(char **argv);
+int	check_all_int(char **argv);
+
 //CREATE PHILO
 void	*create_philo(int nop);
 
@@ -76,11 +84,11 @@ int	check_fork(int nb);
 long long time_ms();
 long long	current_time();
 
-//ATOI
-int	ft_atoi(const char *str);
-
 //UTILS
 int	is_dead(int i);
+int	ft_isdigit(int i);
+int	ft_atoi(const char *str);
+long long	ft_atol(const char *str);
 
 //COLORS
 //Normal Colors

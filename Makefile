@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/18 17:09:41 by admin             #+#    #+#              #
-#    Updated: 2022/09/29 17:24:13 by marvin           ###   ########.fr        #
+#    Updated: 2022/09/29 18:16:51 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME = philo
 INCLUDE = .
 
 SRC = main.c check.c start_args.c create_philo.c routine.c \
-	time.c is_dead.c ft_atoi.c
+	time.c colors.c utils.c
 
 OBJ = $(SRC:.c=.o)
 

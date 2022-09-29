@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	if (!check(++argv))
-		printf("Error\n");
+		return (0);
 	if (!start_args(argc, argv))
 		return (0);
 	//is_dead(i) != 0
