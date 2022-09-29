@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:41:38 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/28 01:18:48 by marvin           ###   ########.fr       */
+/*   Updated: 2022/09/29 16:56:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int	start_args(int argc, char **argv)
 {
+	if (argc < 5 || argc > 6)
+	{
+		printf("Invalid arguments\n");
+		return (0);
+	}
 	args()->number_of_philo = ft_atoi(argv[1]);
 	args()->time_to_die = ft_atoi(argv[2]);
 	args()->time_to_eat = ft_atoi(argv[3]);
@@ -27,8 +32,8 @@ int	start_args(int argc, char **argv)
 		if (args()->number_of_meals <= 0)
 			return (0);
 	}
-	
-	args()->temp = args()->time_to_die;
+	else
+		args()->number_of_meals = 0;
 	args()->start_time = time_ms();
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:16 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/28 01:51:36 by marvin           ###   ########.fr       */
+/*   Updated: 2022/09/29 17:52:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,25 @@ int	ft_atoi(const char *str);
 
 //UTILS
 int	is_dead(int i);
+
+//COLORS
+//Normal Colors
+int	black(char *str);
+int	red(char *str);
+int	green(char *str);
+int	yellow(char *str);
+int	blue(char *str);
+int	purple(char *str);
+int	cyan(char *str);
+int	white(char *str);
+//Bold
+int	bold_black(char *str);
+int	bold_red(char *str);
+int	bold_green(char *str);
+int	bold_yellow(char *str);
+int	bold_blue(char *str);
+int	bold_purple(char *str);
+int	bold_cyan(char *str);
+int	bold_white(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:44:53 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/28 01:53:42 by marvin           ###   ########.fr       */
+/*   Updated: 2022/09/29 16:45:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	*routine(void *arg)
 	i = *(int*)arg;
 	printf("%lli %i created!\n", current_time(), i);
 	//pthread_mutex_init(args()->mutex , NULL);
-	while(is_dead(i) != 0)
+	while(1)
 	{
 		eat(i);
 		nap(i);
