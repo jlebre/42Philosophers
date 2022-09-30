@@ -33,6 +33,6 @@ int main(int argc, char **argv)
 	if (!start_args(argc, argv))
 		return (0);
 	//is_dead(i) != 0
-	create_philo(args()->number_of_philo);
+	create_philo();
 	return (0);
 }

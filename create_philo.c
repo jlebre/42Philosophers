@@ -6,29 +6,31 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:43:36 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/28 01:50:13 by marvin           ###   ########.fr       */
+/*   Updated: 2022/09/30 16:07:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*create_philo(int nop)
+void	create_philo()
 {
-	pthread_t	philo[nop + 1];
-	int			i;
+	int	i;
 
 	i = 1;
-	while (i < nop)
+	args()->philos = malloc(sizeof(t_philo) * args()->number_of_philo);
+	args()->start_time;
+	i = 1;
+	while (i < args()->number_of_philo)
 	{
-		pthread_create(philo + i, NULL, &routine, &i);
-		//printf("%lli %i created!\n", current_time(), i);
+		pthread_mutex_init(args()->philos[i].fork, NULL);
 		i++;
 	}
-	i = 1;
-	while (i < nop)
+	while (i < args()->number_of_philo)
 	{
-		pthread_join(philo[i], NULL);
-		//printf("%lli %i died!\n", current_time(), i);
+		args()->philos[i].number_of_philo = i + 1;
+		pthread_create(args()->philos[i].philo, NULL, &routine, &i);
+		usleep(1000);
+		//printf("%lli %i created!\n", current_time(), i);
 		i++;
 	}
     return (0);

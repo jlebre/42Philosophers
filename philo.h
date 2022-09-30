@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:48:16 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/29 18:21:54 by marvin           ###   ########.fr       */
+/*   Updated: 2022/09/30 16:12:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@
 
 typedef struct s_philo
 {
-	int             philo;
-	int             fork;
+	int number_of_philo;
+	pthread_t             philo;
 	int             time_to_die;
 	int             time_to_eat;
 	int             time_to_sleep;
 	struct timeval  time;
 	int             number_of_meals;
-	pthread_mutex_t *forks;
+	pthread_mutex_t fork;
 	int             temp;
 }   t_philo;
 
@@ -45,11 +45,11 @@ typedef struct s_philo
 typedef struct s_args
 {
 	int number_of_philo;
-	int fork;
+	int *fork;
 	struct timeval  s_time;
-	int time_to_die;
-	int time_to_eat;
-	int time_to_sleep;
+	long long time_to_die;
+	long long time_to_eat;
+	long long time_to_sleep;
 	int number_of_meals;
 	long long start_time;
 	long long last_meal;
@@ -71,7 +71,7 @@ int	check_limits(char **argv);
 int	check_all_int(char **argv);
 
 //CREATE PHILO
-void	*create_philo(int nop);
+void	*create_philo(void);
 
 //ROUTINE
 void	*routine(void *arg);
