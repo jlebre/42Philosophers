@@ -5,37 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 16:44:45 by marvin            #+#    #+#             */
-/*   Updated: 2022/09/29 16:44:45 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/01 16:50:06 by marvin            #+#    #+#             */
+/*   Updated: 2022/10/01 16:50:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_args	*args(void)
-{
-	static t_args	args;
-	return (&args);
-}
-
-t_args	*philos(void)
-{
-	static t_args	philos;
-	return (&philos);
-}
-
 int main(int argc, char **argv)
 {
+	t_args  args;
+
 	if (argc < 2)
 		return (0);
-	if (!check(++argv))
-		return (0);
-	if (!start_args(argc, argv))
-		return (0);
-	//is_dead(i) != 0
-	create_philo();
-	printf("teste\n");
-	destroy_philo();
-	printf("teste\n");
+	check(argv);
+	start_args(argc, argv, &args);
 	return (0);
 }

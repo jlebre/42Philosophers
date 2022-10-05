@@ -6,21 +6,20 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/18 17:09:41 by admin             #+#    #+#              #
-#    Updated: 2022/09/29 18:16:51 by marvin           ###   ########.fr        #
+#    Updated: 2022/10/01 16:42:22 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 RM = @rm -fr
-FLAGS = -Wall -Werror -Wextra -pthread
-#-fsanitize=address
+FLAGS = -Wall -Werror -Wextra -pthread -fsanitize=address
 
 NAME = philo
 
 INCLUDE = .
 
-SRC = main.c check.c start_args.c create_philo.c routine.c \
-	time.c colors.c utils.c
+SRC = main.c check.c start_args.c create_philo.c destroy_philo.c \
+	time.c colors.c utils.c routine.c
 
 OBJ = $(SRC:.c=.o)
 

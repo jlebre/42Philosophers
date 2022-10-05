@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:44:53 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/29 16:45:17 by marvin           ###   ########.fr       */
+/*   Updated: 2022/09/30 18:13:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	eat(int nb)
 		//pthread_mutex_lock(mut());
 		printf("%lli %i has taken a fork\n", current_time(), nb);
 		printf("%lli %i is eating\n", current_time(), nb);
-		usleep(args()->time_to_eat);
+		usleep(args()->time_to_eat * 1000);
 		if (nb == 2)
 			sleep(2);
 		//args()->temp = args()->time_to_die;
@@ -43,7 +43,7 @@ void	eat(int nb)
 
 void	nap(int nb)
 {
-	usleep(args()->time_to_sleep);
+	usleep(args()->time_to_sleep * 1000);
 	printf("%lli %i is sleeping\n", current_time(), nb);
 }
 

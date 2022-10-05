@@ -1,41 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 16:44:45 by marvin            #+#    #+#             */
-/*   Updated: 2022/09/29 16:44:45 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/01 17:02:48 by marvin            #+#    #+#             */
+/*   Updated: 2022/10/01 17:02:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_args	*args(void)
+void    check_all_int(char **argv)
 {
-	static t_args	args;
-	return (&args);
+	int		i;
+	int		j;
+	char	**input;
+
+	i = 0;
+	input = argv;
+	input++;
+	while (input[i])
+	{
+		j = 0;
+		if (input[i][j] == '+' || input[i][j] == '-')
+			j++;
+		while (input[i][j])
+		{
+			if (!ft_isdigit(input[i][j]))
+				return (0);
+			j++;
+		}
+		i++;
+	}
 }
 
-t_args	*philos(void)
+void    check_limits(char **argv)
 {
-	static t_args	philos;
-	return (&philos);
+
 }
 
-int main(int argc, char **argv)
+void    check(char **argv)
 {
-	if (argc < 2)
-		return (0);
-	if (!check(++argv))
-		return (0);
-	if (!start_args(argc, argv))
-		return (0);
-	//is_dead(i) != 0
-	create_philo();
-	printf("teste\n");
-	destroy_philo();
-	printf("teste\n");
-	return (0);
+	check_all_int(argv);
+	check_limits(argv)
 }

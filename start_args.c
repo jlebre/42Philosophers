@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:41:38 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/30 15:43:18 by marvin           ###   ########.fr       */
+/*   Updated: 2022/09/30 19:33:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	start_args(int argc, char **argv)
 	}
 	else
 		args()->number_of_meals = 0;
+	args()->temp = 0;
 	args()->start_time = time_ms();
 	return (1);
 }

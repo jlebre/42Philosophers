@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:43:36 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/30 16:07:11 by marvin           ###   ########.fr       */
+/*   Updated: 2022/09/30 19:38:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,22 @@ void	create_philo()
 	int	i;
 
 	i = 1;
-	args()->philos = malloc(sizeof(t_philo) * args()->number_of_philo);
-	args()->start_time;
+	args()->philo = malloc(sizeof(t_philo) * args()->number_of_philo);
+	//args()->start_time;
 	i = 1;
 	while (i < args()->number_of_philo)
 	{
-		pthread_mutex_init(args()->philos[i].fork, NULL);
+		pthread_mutex_init(args()->philo[i].fork, NULL);
 		i++;
 	}
+	printf("testeeeee\n");
 	while (i < args()->number_of_philo)
 	{
-		args()->philos[i].number_of_philo = i + 1;
-		pthread_create(args()->philos[i].philo, NULL, &routine, &i);
+		args()->philo[i].number_of_philo = i + 1;
+		pthread_create(&args()->philo[i].philo, NULL, &routine, &i);
+		printf("%lli %i created!\n", current_time(), i);
 		usleep(1000);
-		//printf("%lli %i created!\n", current_time(), i);
 		i++;
 	}
-    return (0);
+	printf("testeeeee\n");
 }
