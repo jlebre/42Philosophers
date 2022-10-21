@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:19:43 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/21 20:43:52 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/21 21:26:04 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,19 @@ int	eat(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
-		if (check_fork(philo) == 0)
+		if (!check_fork(philo))
 			return (0);
 	}
 	else
 	{
-		if (check_fork_2(philo) == 0)
+		if (!check_fork_2(philo))
 			return (0);
 	}
-	if (!check_fork(philo))
-		return (0);
 	print_2(philo, "is eating");
 	while (philo->args->time_to_eat > (get_time() - philo->last_meal))
 	{
 		pthread_mutex_lock(&philo->args->mut_died);
-		if (philo->args->died)
+		if (philo->args->died == 1)
 		{
 			pthread_mutex_unlock(&philo->args->mut_died);
 			break ;

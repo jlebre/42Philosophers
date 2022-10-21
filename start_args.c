@@ -38,7 +38,6 @@ void	start_args(int argc, char **argv, t_args *args)
 		args->number_of_meals = -1;
 	args->start_time = get_time();
 	args->died = 0;
-	args->lock = 0;
 }
 
 t_philo	*start_philo(t_args *args)

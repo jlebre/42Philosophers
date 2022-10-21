@@ -28,9 +28,9 @@ typedef struct s_philo
 {
 	int				id;
 	int				meals;
+	pthread_t		philo;
 	long long		last_meal;
 	long long		last_nap;
-	pthread_t		philo;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	right_fork;
 	struct s_args	*args;
@@ -39,8 +39,8 @@ typedef struct s_philo
 typedef struct s_args
 {
 	int				died;
-	int				lock;
 	int				number_of_philosophers;
+	int				number_of_meals;
 	long long		time_to_die;
 	long long		time_to_eat;
 	long long		time_to_sleep;
@@ -49,14 +49,13 @@ typedef struct s_args
 	pthread_mutex_t	check_print;
 	pthread_mutex_t	print;
 	pthread_mutex_t	eat;
-	int				number_of_meals;
 }	t_args;
 
 //CHECK
 void				check(char **argv);
 void				check_all_int(char **argv);
 void				check_limits(char **argv);
-void				check_if_dead(t_philo *philo);
+int					check_if_dead(t_philo *philo);
 int					check_fork(t_philo *philo);
 int					check_fork_2(t_philo *philo);
 int					only_one_philosopher(t_philo *philo);
@@ -69,7 +68,7 @@ void				start_mutex(t_philo *philo);
 
 //PHILO
 void				create_philo(t_args *args);
-void					destroy_philo(t_philo *philo, t_args *args);
+void				destroy_philo(t_philo *philo, t_args *args);
 int					kill_everything(t_philo *philo);
 
 //PRINT
