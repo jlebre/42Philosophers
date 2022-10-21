@@ -1,13 +1,11 @@
-//MUTEX FORKS
-//Check if dead inside and outside
-
-/*
+PARAMETERS
 number_of_philosophers
 time_to_die
 time_to_eat
 time_to_sleep
 [number_of_times_each_philosopher_must_eat]
 
+ALLOWED FUNCTIONS
 memset
 printf
 malloc
@@ -22,4 +20,14 @@ pthread_mutex_init
 pthread_mutex_destroy
 pthread_mutex_lock
 pthread_mutex_unlock
-*/
+
+WEBGRAFIA
+THREADS
+https://www.geeksforgeeks.org/thread-in-operating-system/
+https://www.thegeekstuff.com/2012/03/linux-threads-intro/
+https://iq.opengenus.org/linux-thread-creation-data-passing-waiting/#:~:text=Linux%20threads%3A%20Creation%2C%20Data%20passing%2C%20Waiting%201%20Introduction.,Attributes.%20...%206%20Summary.%20...%207%20References.%20
+MUTEX
+https://www.delftstack.com/howto/c/mutex-in-c/
+https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/
+GETTIMEOFDAY
+https://linuxhint.com/gettimeofday_c_language/

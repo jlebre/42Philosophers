@@ -5,30 +5,36 @@
 #                                                     +:+ +:+         +:+      #
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/18 17:09:41 by admin             #+#    #+#              #
-#    Updated: 2022/10/01 16:42:22 by marvin           ###   ########.fr        #
+#    Created: 2022/10/01 16:44:48 by marvin            #+#    #+#              #
+#    Updated: 2022/10/01 16:44:48 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-RM = @rm -fr
-FLAGS = -Wall -Werror -Wextra -pthread -fsanitize=address
+RM = @rm -rf
+FLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread
 
 NAME = philo
 
 INCLUDE = .
 
-SRC = main.c check.c start_args.c create_philo.c destroy_philo.c \
-	time.c colors.c utils.c routine.c
+SRC = main.c check.c start_args.c create_philo.c check_if_dead.c print.c \
+	destroy_philo.c routine.c colors.c utils.c time.c check_fork.c eat.c
 
 OBJ = $(SRC:.c=.o)
 
-all: $(NAME) clean
+all: $(NAME)
 
 $(NAME): $(OBJ) $(INCLUDE)
 	@$(CC) $(OBJ) $(FLAGS) -o $(NAME)
+	@echo "██████╗ ██╗  ██╗██╗██╗      ██████╗ "
+	@echo "██╔══██╗██║  ██║██║██║     ██╔═══██╗"
+	@echo "██████╔╝███████║██║██║     ██║   ██║"
+	@echo "██╔═══╝ ██╔══██║██║██║     ██║   ██║"
+	@echo "██║     ██║  ██║██║███████╗╚██████╔╝"
+	@echo "╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝ ╚═════╝ "
 	@echo "\033[0;32mPhilo Compiled!\033[0m"
-
+ 
 .c.o:
 	@$(CC) $(FLAGS) -I$(INCLUDE) -c $< -o $(<:.c=.o)
 

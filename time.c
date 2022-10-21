@@ -3,28 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 14:48:57 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/28 01:22:23 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/17 13:33:51 by jlebre            #+#    #+#             */
+/*   Updated: 2022/10/17 13:33:51 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long long time_ms()
+long long	get_time(void)
 {
-	struct timeval	tv;
-	long long		sec;
-	long long		usec;
+	struct timeval	time;
 
-	gettimeofday(&tv, NULL);
-	sec = tv.tv_sec - args()->s_time.tv_sec;
-	usec = tv.tv_usec - args()->s_time.tv_usec;
-	return ((usec / 1000) + (sec * 1000));
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-long long	current_time()
+long long	current_time(t_args *args)
 {
-	return (time_ms() - args()->start_time);
+	return (get_time() - args->start_time);
 }

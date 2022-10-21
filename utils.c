@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 18:12:07 by marvin            #+#    #+#             */
-/*   Updated: 2022/09/29 18:12:07 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/17 13:33:56 by jlebre            #+#    #+#             */
+/*   Updated: 2022/10/17 13:33:56 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_error(char	*str)
+{
+	red("Error!\n");
+	red(str);
+	exit(0);
+}
+
+int	ft_isdigit(int i)
+{
+	if ((i > 47) && (i < 58))
+		return (1);
+	else
+		return (0);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -65,26 +80,3 @@ long long	ft_atol(const char *str)
 	}
 	return (sinal * val);
 }
-
-int	ft_isdigit(int i)
-{
-	if ((i > 47) && (i < 58))
-		return (1);
-	else
-		return (0);
-}
-
-int	is_dead(int i)
-{
-	if ((time_ms() - args()->last_meal) > args()->time_to_die
-		&& current_time() >= args()->time_to_die)
-	{
-		printf("%lli %i died\n", current_time(), i);
-		return (0);
-	}
-	else
-		return (1);
-}
-
-//0 - Dead
-//1 - Not Dead

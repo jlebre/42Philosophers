@@ -3,39 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/29 16:44:45 by marvin            #+#    #+#             */
-/*   Updated: 2022/09/29 16:44:45 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/17 13:33:24 by jlebre            #+#    #+#             */
+/*   Updated: 2022/10/17 13:33:24 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_args	*args(void)
+int	main(int argc, char **argv)
 {
-	static t_args	args;
-	return (&args);
-}
+	t_args	args;
 
-t_args	*philos(void)
-{
-	static t_args	philos;
-	return (&philos);
-}
-
-int main(int argc, char **argv)
-{
 	if (argc < 2)
-		return (0);
-	if (!check(++argv))
-		return (0);
-	if (!start_args(argc, argv))
-		return (0);
-	//is_dead(i) != 0
-	create_philo();
-	printf("teste\n");
-	destroy_philo();
-	printf("teste\n");
+		ft_error("No Arguments!\n");
+	check(argv);
+	start_args(argc, argv, &args);
+	create_philo(&args);
 	return (0);
 }

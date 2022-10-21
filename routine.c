@@ -3,68 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 14:44:53 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/30 18:13:54 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/17 13:18:53 by jlebre            #+#    #+#             */
+/*   Updated: 2022/10/17 13:18:53 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	check_fork(int nb)
+void	*routine(void *i)
 {
-	return (nb);
-}
+	t_philo	*philo;
 
-void	eat(int nb)
-{
-	if (check_fork(nb))
+	philo = (t_philo *)i;
+	while (1)
 	{
-		//pthread_mutex_lock(mut());
-		printf("%lli %i has taken a fork\n", current_time(), nb);
-		printf("%lli %i is eating\n", current_time(), nb);
-		usleep(args()->time_to_eat * 1000);
-		if (nb == 2)
-			sleep(2);
-		//args()->temp = args()->time_to_die;
-		args()->last_meal = time_ms();
-		//pthread_mutex_unlock(mut());
-	}
-	else
-	{
-		while (args()->temp != 0)
+		if (!eat(philo))
+			break ;
+		if (!print(philo, "is sleeping"))
+			break ;
+		while (philo->args->time_to_sleep > (get_time() - philo->last_nap))
 		{
-			eat(nb);
-			args()->temp--;
+			pthread_mutex_lock(&philo->args->mut_died);
+			if (philo->args->died == 1)
+			{
+				pthread_mutex_unlock(&philo->args->mut_died);
+				break ;
+			}
+			pthread_mutex_unlock(&philo->args->mut_died);
 		}
+		if (!print(philo, "is thinking"))
+			break ;
 	}
-}
-
-void	nap(int nb)
-{
-	usleep(args()->time_to_sleep * 1000);
-	printf("%lli %i is sleeping\n", current_time(), nb);
-}
-
-void	think(int nb)
-{
-	printf("%lli %i is thinking\n", current_time(), nb);
-}
-
-void	*routine(void *arg)
-{
-	int i;
-
-	i = *(int*)arg;
-	printf("%lli %i created!\n", current_time(), i);
-	//pthread_mutex_init(args()->mutex , NULL);
-	while(1)
-	{
-		eat(i);
-		nap(i);
-		think(i);
-	}
-	//pthread_mutex_destroy(args()->mutex);
-    return (0);
+	return (NULL);
 }

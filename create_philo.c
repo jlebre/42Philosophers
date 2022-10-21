@@ -3,36 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   create_philo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 14:43:36 by jlebre            #+#    #+#             */
-/*   Updated: 2022/09/30 19:38:55 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/17 14:34:10 by jlebre            #+#    #+#             */
+/*   Updated: 2022/10/17 14:34:10 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	create_philo()
+void	create_philo(t_args *args)
 {
-	int	i;
+	int		i;
+	t_philo	*philo;
 
-	i = 1;
-	args()->philo = malloc(sizeof(t_philo) * args()->number_of_philo);
-	//args()->start_time;
-	i = 1;
-	while (i < args()->number_of_philo)
+	philo = start_philo(args);
+	i = 0;
+	while (i < args->number_of_philosophers)
 	{
-		pthread_mutex_init(args()->philo[i].fork, NULL);
+		pthread_create(&philo[i].philo, NULL, &routine, &philo[i]);
 		i++;
 	}
-	printf("testeeeee\n");
-	while (i < args()->number_of_philo)
-	{
-		args()->philo[i].number_of_philo = i + 1;
-		pthread_create(&args()->philo[i].philo, NULL, &routine, &i);
-		printf("%lli %i created!\n", current_time(), i);
-		usleep(1000);
-		i++;
-	}
-	printf("testeeeee\n");
+	check_if_dead(philo);
+	destroy_philo(philo, args);
 }
