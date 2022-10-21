@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:15:28 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/21 17:33:37 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/21 19:39:11 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	check_if_dead(t_philo *philo)
 {
-	//printf("GT: %lli\nPLM: %lli\nPATTD: %lli\n", get_time(), philo->last_meal, philo->args->time_to_die);
 	if ((current_time(philo->args) - philo->last_meal) > philo->args->time_to_die)
 	{
 		if (philo->args->lock == 0)

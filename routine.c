@@ -33,6 +33,7 @@ void	*routine(void *i)
 			}
 			pthread_mutex_unlock(&philo->args->mut_died);
 		}
+		philo->last_nap = current_time(philo->args);
 		if (!print(philo, "is thinking"))
 			break ;
 	}

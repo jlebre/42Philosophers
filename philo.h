@@ -17,7 +17,8 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <sys/time.h> 
+# include <sys/time.h>
+# include <stdbool.h>
 # include <pthread.h>
 
 # define INT_MAX	2147483647
@@ -30,6 +31,8 @@ typedef struct s_philo
 	long long		last_meal;
 	long long		last_nap;
 	pthread_t		philo;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	right_fork;
 	struct s_args	*args;
 }	t_philo;
 
@@ -42,7 +45,6 @@ typedef struct s_args
 	long long		time_to_eat;
 	long long		time_to_sleep;
 	long long		start_time;
-	pthread_mutex_t	fork[200];
 	pthread_mutex_t	mut_died;
 	pthread_mutex_t	check_print;
 	pthread_mutex_t	print;

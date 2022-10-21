@@ -66,13 +66,19 @@ t_philo	*start_philo(t_args *args)
 void	start_mutex(t_philo *philo)
 {
 	int	i;
+	int	nb;
 
 	i = 0;
-	while (i < philo->args->number_of_philosophers)
+	nb = philo->args->number_of_philosophers;
+	while (i < nb)
 	{
-		pthread_mutex_init(&philo->args->fork[i], NULL);
+		pthread_mutex_init(&philo[i].right_fork, NULL);
+		if (i != 0)
+			philo[i].left_fork = &philo[i - 1].right_fork;
+		else if (i == 0)
+			philo[i].left_fork = &philo[nb - 1].right_fork;
 		i++;
-	}
+	} 
 	pthread_mutex_init(&philo->args->print, NULL);
 	pthread_mutex_init(&philo->args->eat, NULL);
 	pthread_mutex_init(&philo->args->mut_died, NULL);
