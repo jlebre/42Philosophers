@@ -56,9 +56,11 @@ typedef struct s_args
 void				check(char **argv);
 void				check_all_int(char **argv);
 void				check_limits(char **argv);
-int					check_if_dead(t_philo *philo);
+void				check_if_dead(t_philo *philo);
 int					check_fork(t_philo *philo);
 int					check_fork_2(t_philo *philo);
+int					only_one_philosopher(t_philo *philo);
+int					all_ate(t_philo *philo);
 
 //START ARGS
 void				start_args(int argc, char **argv, t_args *args);
@@ -67,7 +69,7 @@ void				start_mutex(t_philo *philo);
 
 //PHILO
 void				create_philo(t_args *args);
-int					destroy_philo(t_philo *philo, t_args *args);
+void					destroy_philo(t_philo *philo, t_args *args);
 int					kill_everything(t_philo *philo);
 
 //PRINT

@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 15:28:12 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/21 19:38:54 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/21 20:48:04 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	print(t_philo *philo, char *str)
 {
 	pthread_mutex_lock(&philo->args->check_print);
-	if (philo->args->died)
+	if (philo->args->died == 1)
 	{
 		pthread_mutex_unlock(&philo->args->print);
 		return (0);
@@ -25,7 +25,7 @@ int	print(t_philo *philo, char *str)
 	return (1);
 }
 
-/* int	print_2(t_philo *philo, char *str)
+int	print_2(t_philo *philo, char *str)
 {
 	pthread_mutex_lock(&philo->args->eat);
 	if (philo->args->died == 1)
@@ -38,4 +38,4 @@ int	print(t_philo *philo, char *str)
 	philo->last_meal = get_time();
 	pthread_mutex_unlock(&philo->args->eat);
 	return (1);
-} */
+}

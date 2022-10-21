@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-int	destroy_philo(t_philo *philo, t_args *args)
+void	destroy_philo(t_philo *philo, t_args *args)
 {
 	int	i;
 
@@ -23,7 +23,6 @@ int	destroy_philo(t_philo *philo, t_args *args)
 		i++;
 	}
 	kill_everything(philo);
-	return (0);
 }
 
 int	kill_everything(t_philo *philo)

@@ -6,25 +6,67 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:15:28 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/21 19:39:11 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/21 21:10:22 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	check_if_dead(t_philo *philo)
+void	check_if_dead(t_philo *philo)
 {
-	if ((current_time(philo->args) - philo->last_meal) > philo->args->time_to_die)
+	int	i;
+
+	i = 0;
+	pthread_mutex_lock(&philo->args->mut_died);
+	while (i < philo->args->number_of_philosophers && philo->args->died != 1)
 	{
-		if (philo->args->lock == 0)
+		if (get_time() - philo->last_meal >= philo->args->time_to_die)
 		{
-			philo->args->lock = 1;
-			pthread_mutex_lock(&philo->args->mut_died);
-			philo->args->died = 1;
-			pthread_mutex_unlock(&philo->args->mut_died);
 			printf("%lld %i died\n", current_time(philo->args), philo->id);
-			return (0);
+			philo->args->died = 1;
+			i++;
+			pthread_mutex_unlock(&philo->args->mut_died);
+			return ;
 		}
+		if (all_ate(philo) == 0)
+			return ;
+		if (only_one_philosopher(philo) == 0)
+			return ;
+	}
+	pthread_mutex_unlock(&philo->args->mut_died);
+}
+
+int	all_ate(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while ( philo->args->number_of_meals != -1
+		&& i < philo->args->number_of_philosophers
+		&& philo[i].meals >= philo->args->number_of_meals)
+		i++;
+	if (i == philo->args->number_of_philosophers)
+	{
+		pthread_mutex_lock(&philo->args->check_print);
+		philo->args->died = 1;
+		pthread_mutex_unlock(&philo->args->check_print);
+		pthread_mutex_unlock(&philo->args->mut_died);
+		return (0);
+	}
+	return (1);
+}
+
+int	only_one_philosopher(t_philo *philo)
+{
+	if (philo->args->number_of_philosophers == 1)
+	{
+		usleep(philo->args->time_to_die * 1000);
+		printf("%lld %i died\n", current_time(philo->args), philo->id);
+		pthread_mutex_lock(&philo->args->check_print);
+		philo->args->died = 1;
+		pthread_mutex_unlock(&philo->args->check_print);
+		pthread_mutex_unlock(&philo->args->mut_died);
+		return (0);
 	}
 	return (1);
 }
