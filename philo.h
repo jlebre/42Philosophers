@@ -53,26 +53,32 @@ typedef struct s_args
 	long long		time_to_sleep;
 	long long		start_time;
 	t_philo			*philos;
-	t_fork 			forks[1000];
+	t_fork			forks[1000];
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	mutex_life;
 }	t_args;
 
 //CHECK
-int 				check_life_all();
-int 				check_life();
-t_args				*args();
 void				check(char **argv);
 void				check_all_int(char **argv);
 void				check_limits(char **argv);
+
+//FORK
 int					check_fork(t_philo *philo);
-int					all_ate(t_philo *philo);
+int					check_fork_2(t_philo *philo);
 int					free_fork(t_philo *philo);
+
+//CHECK LIFE
+int					check_life(void);
+int					check_life_all(void);
+int					all_ate(t_philo *philo);
 int					only_one_philosopher(void);
+static void			dead_all(int p);
 
 //START ARGS
-void				start_args(int argc, char **argv, t_args *args);
+t_args				*args(void);
 t_philo				*start_philo(t_args *args);
+void				start_args(int argc, char **argv, t_args *args);
 void				start_mutex(t_philo *philo);
 
 //PHILO
@@ -93,7 +99,7 @@ long long			get_time(void);
 long long			current_time(t_args *args);
 
 //UTILS
-void				ft_error(char	*str);
+void				ft_error(char *str);
 int					ft_isdigit(int i);
 int					ft_atoi(const char *str);
 long long			ft_atol(const char *str);

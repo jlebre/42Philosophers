@@ -29,7 +29,7 @@ void	*routine(void *i)
 		philo->time = philo->args->time_to_sleep + get_time();
 		while (get_time() < philo->time)
 		{
-			if (!check_life())			
+			if (!check_life())
 				return (NULL);
 		}
 		if (!print(philo, "is thinking"))

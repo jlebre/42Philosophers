@@ -6,19 +6,18 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:15:28 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/22 23:33:25 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/23 00:11:29 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void dead_all(int p)
+static void	dead_all(int p)
 {
-	int	i;
+	int		i;
 	t_philo	*philo;
 
 	i = 0;
-	
 	pthread_mutex_lock(&args()->mutex_life);
 	args()->died = 1;
 	pthread_mutex_unlock(&args()->mutex_life);
@@ -32,9 +31,9 @@ static void dead_all(int p)
 	}
 }
 
-int check_life(void)
+int	check_life(void)
 {
-	int i;
+	int	i;
 
 	pthread_mutex_lock(&args()->mutex_life);
 	i = args()->died;
@@ -42,34 +41,33 @@ int check_life(void)
 	return (!i);
 }
 
-int check_life_all(void)
+int	check_life_all(void)
 {
-	int 	is_dead;
-	int		i;
 	t_philo	*philo;
+	int		die;
+	int		i;
 	int		is;
 
-	is_dead = 0;
-	i = 0;
+	die = 0;
+	i = -1;
 	is = 0;
 	pthread_mutex_lock(&args()->mutex);
-	while (i < args()->number_of_philosophers && args()->died != 1 && !is_dead)
+	while (++i < args()->number_of_philosophers && args()->died != 1 && !die)
 	{
 		philo = &args()->philos[i];
 		if (get_time() > philo->last_meal)
 		{
 			printf("%lld %i died\n", current_time(philo->args), philo->id);
-			is_dead++;
+			die++;
 		}
 		if (args()->number_of_meals >= 0)
 			is += (philo->meals >= args()->number_of_meals);
-		i++;
 	}
-	is_dead += (is ==  args()->number_of_philosophers);
-	if (is_dead > 0)
+	die += (is == args()->number_of_philosophers);
+	if (die > 0)
 		dead_all(i);
 	pthread_mutex_unlock(&args()->mutex);
-	return (is_dead == 0);
+	return (die == 0);
 }
 
 int	all_ate(t_philo *philo)

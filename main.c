@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-t_args	*args()
+t_args	*args(void)
 {
 	static t_args	a;
 
@@ -21,13 +21,12 @@ t_args	*args()
 
 int	main(int argc, char **argv)
 {
-
 	if (argc < 2)
 		ft_error("No Arguments!\n");
 	check(argv);
 	start_args(argc, argv, args());
 	if (args()->number_of_philosophers == 1)
-	 only_one_philosopher();
+		only_one_philosopher();
 	else
 		create_philo(args());
 	return (0);
