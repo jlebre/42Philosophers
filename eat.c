@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:19:43 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/21 21:26:04 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/22 19:46:45 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int	eat(t_philo *philo)
 	print_2(philo, "is eating");
 	while (philo->args->time_to_eat > (get_time() - philo->last_meal))
 	{
-		pthread_mutex_lock(&philo->args->mut_died);
+		pthread_mutex_lock(&philo->args->mutex);
 		if (philo->args->died == 1)
 		{
-			pthread_mutex_unlock(&philo->args->mut_died);
+			pthread_mutex_unlock(&philo->args->mutex);
 			break ;
 		}
-		pthread_mutex_unlock(&philo->args->mut_died);
+		pthread_mutex_unlock(&philo->args->mutex);
 	}
 	eat_2(philo);
 	return (1);

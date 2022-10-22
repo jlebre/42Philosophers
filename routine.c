@@ -25,13 +25,13 @@ void	*routine(void *i)
 			break ;
 		while (philo->args->time_to_sleep > (get_time() - philo->last_nap))
 		{
-			pthread_mutex_lock(&philo->args->mut_died);
+			pthread_mutex_lock(&philo->args->mutex);
 			if (philo->args->died == 1)
 			{
-				pthread_mutex_unlock(&philo->args->mut_died);
+				pthread_mutex_unlock(&philo->args->mutex);
 				break ;
 			}
-			pthread_mutex_unlock(&philo->args->mut_died);
+			pthread_mutex_unlock(&philo->args->mutex);
 		}
 		philo->last_nap = current_time(philo->args);
 		if (!print(philo, "is thinking"))

@@ -45,17 +45,14 @@ typedef struct s_args
 	long long		time_to_eat;
 	long long		time_to_sleep;
 	long long		start_time;
-	pthread_mutex_t	mut_died;
-	pthread_mutex_t	check_print;
-	pthread_mutex_t	print;
-	pthread_mutex_t	eat;
+	pthread_mutex_t	mutex;
 }	t_args;
 
 //CHECK
 void				check(char **argv);
 void				check_all_int(char **argv);
 void				check_limits(char **argv);
-int					check_if_dead(t_philo *philo);
+void				check_if_dead(t_philo *philo);
 int					check_fork(t_philo *philo);
 int					check_fork_2(t_philo *philo);
 int					only_one_philosopher(t_philo *philo);
@@ -69,7 +66,7 @@ void				start_mutex(t_philo *philo);
 //PHILO
 void				create_philo(t_args *args);
 void				destroy_philo(t_philo *philo, t_args *args);
-int					kill_everything(t_philo *philo);
+void				kill_everything(t_philo *philo);
 
 //PRINT
 int					print(t_philo *philo, char *str);

@@ -25,7 +25,7 @@ void	destroy_philo(t_philo *philo, t_args *args)
 	kill_everything(philo);
 }
 
-int	kill_everything(t_philo *philo)
+void	kill_everything(t_philo *philo)
 {
 	int	i;
 	int	nb;
@@ -37,10 +37,6 @@ int	kill_everything(t_philo *philo)
 		pthread_mutex_destroy(&philo[i].right_fork);
 		i++;
 	}
-	pthread_mutex_destroy(&philo->args->print);
-	pthread_mutex_destroy(&philo->args->eat);
-	pthread_mutex_destroy(&philo->args->mut_died);
-	pthread_mutex_destroy(&philo->args->check_print);
+	pthread_mutex_destroy(&philo->args->mutex);
 	free(philo);
-	return (0);
 }

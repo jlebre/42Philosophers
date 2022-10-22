@@ -77,9 +77,6 @@ void	start_mutex(t_philo *philo)
 		else if (i == 0)
 			philo[i].left_fork = &philo[nb - 1].right_fork;
 		i++;
-	} 
-	pthread_mutex_init(&philo->args->print, NULL);
-	pthread_mutex_init(&philo->args->eat, NULL);
-	pthread_mutex_init(&philo->args->mut_died, NULL);
-	pthread_mutex_init(&philo->args->check_print, NULL);
+	}
+	pthread_mutex_init(&philo->args->mutex, NULL);
 }
