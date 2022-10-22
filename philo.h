@@ -24,6 +24,12 @@
 # define INT_MAX	2147483647
 # define INT_MIN	-2147483648
 
+typedef struct s_fork
+{
+	int				is_select;
+	pthread_mutex_t	mutex;
+}	t_fork;
+
 typedef struct s_philo
 {
 	int				id;
@@ -31,8 +37,9 @@ typedef struct s_philo
 	pthread_t		philo;
 	long long		last_meal;
 	long long		last_nap;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	right_fork;
+	t_fork			*left_fork;
+	t_fork			*right_fork;
+	long long		time;
 	struct s_args	*args;
 }	t_philo;
 
@@ -45,18 +52,23 @@ typedef struct s_args
 	long long		time_to_eat;
 	long long		time_to_sleep;
 	long long		start_time;
+	t_philo			*philos;
+	t_fork 			forks[1000];
 	pthread_mutex_t	mutex;
+	pthread_mutex_t	mutex_life;
 }	t_args;
 
 //CHECK
+int 				check_life_all();
+int 				check_life();
+t_args				*args();
 void				check(char **argv);
 void				check_all_int(char **argv);
 void				check_limits(char **argv);
-void				check_if_dead(t_philo *philo);
 int					check_fork(t_philo *philo);
-int					check_fork_2(t_philo *philo);
-int					only_one_philosopher(t_philo *philo);
 int					all_ate(t_philo *philo);
+int					free_fork(t_philo *philo);
+int					only_one_philosopher(void);
 
 //START ARGS
 void				start_args(int argc, char **argv, t_args *args);
@@ -75,7 +87,6 @@ int					print_2(t_philo *philo, char *str);
 //ROUTINE
 void				*routine(void *arg);
 int					eat(t_philo *philo);
-int					eat_2(t_philo *philo);
 
 //TIME
 long long			get_time(void);

@@ -30,7 +30,7 @@ void	start_args(int argc, char **argv, t_args *args)
 	}
 	if (argc == 6)
 	{
-		args->number_of_meals = ft_atoi(argv[4]);
+		args->number_of_meals = ft_atoi(argv[5]);
 		if (args->number_of_meals <= 0)
 			ft_error("Invalid values!\n");
 	}
@@ -49,11 +49,12 @@ t_philo	*start_philo(t_args *args)
 	philo = malloc(sizeof(t_philo) * args->number_of_philosophers);
 	if (!philo)
 		return (0);
+	args->philos = philo;
 	while (i < args->number_of_philosophers)
 	{
 		philo[i].id = i + 1;
 		philo[i].meals = 0;
-		philo[i].last_meal = args->start_time;
+		philo[i].last_meal = args->start_time + args->time_to_die;
 		philo[i].last_nap = args->start_time;
 		philo[i].args = args;
 		i++;
@@ -67,16 +68,22 @@ void	start_mutex(t_philo *philo)
 	int	i;
 	int	nb;
 
-	i = 0;
+	i = -1;
 	nb = philo->args->number_of_philosophers;
+	while (++i < nb)
+	{
+		pthread_mutex_init(&args()->forks[i].mutex, NULL);
+		philo[i].right_fork = &args()->forks[i];
+	}
+	i = 0;
 	while (i < nb)
 	{
-		pthread_mutex_init(&philo[i].right_fork, NULL);
 		if (i != 0)
-			philo[i].left_fork = &philo[i - 1].right_fork;
-		else if (i == 0)
-			philo[i].left_fork = &philo[nb - 1].right_fork;
+			philo[i].left_fork = philo[i - 1].right_fork;
+		else
+			philo[i].left_fork = philo[nb - 1].right_fork;
 		i++;
 	}
-	pthread_mutex_init(&philo->args->mutex, NULL);
+	pthread_mutex_init(&args()->mutex, NULL);
+	pthread_mutex_init(&args()->mutex_life, NULL);
 }

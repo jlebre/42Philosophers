@@ -34,9 +34,10 @@ void	kill_everything(t_philo *philo)
 	nb = philo->args->number_of_philosophers;
 	while (i < nb)
 	{
-		pthread_mutex_destroy(&philo[i].right_fork);
+		pthread_mutex_destroy(&args()->forks[i].mutex);
 		i++;
 	}
 	pthread_mutex_destroy(&philo->args->mutex);
+	pthread_mutex_destroy(&philo->args->mutex_life);
 	free(philo);
 }

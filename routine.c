@@ -17,23 +17,21 @@ void	*routine(void *i)
 	t_philo	*philo;
 
 	philo = (t_philo *)i;
-	while (1)
+	pthread_mutex_lock(&args()->mutex);
+	philo->last_meal = get_time() + args()->time_to_die;
+	pthread_mutex_unlock(&args()->mutex);
+	while (check_life())
 	{
 		if (!eat(philo))
 			break ;
 		if (!print(philo, "is sleeping"))
 			break ;
-		while (philo->args->time_to_sleep > (get_time() - philo->last_nap))
+		philo->time = philo->args->time_to_sleep + get_time();
+		while (get_time() < philo->time)
 		{
-			pthread_mutex_lock(&philo->args->mutex);
-			if (philo->args->died == 1)
-			{
-				pthread_mutex_unlock(&philo->args->mutex);
-				break ;
-			}
-			pthread_mutex_unlock(&philo->args->mutex);
+			if (!check_life())			
+				return (NULL);
 		}
-		philo->last_nap = current_time(philo->args);
 		if (!print(philo, "is thinking"))
 			break ;
 	}

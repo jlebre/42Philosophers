@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:19:43 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/22 19:46:45 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/22 23:25:00 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,28 @@
 
 int	eat(t_philo *philo)
 {
-	if (philo->id % 2 == 0)
+	while (1)
 	{
-		if (!check_fork(philo))
-			return (0);
-	}
-	else
-	{
-		if (!check_fork_2(philo))
-			return (0);
-	}
-	print_2(philo, "is eating");
-	while (philo->args->time_to_eat > (get_time() - philo->last_meal))
-	{
-		pthread_mutex_lock(&philo->args->mutex);
-		if (philo->args->died == 1)
-		{
-			pthread_mutex_unlock(&philo->args->mutex);
+		if (check_fork(philo))	
+		{	
+			print(philo, "is eating");
+			pthread_mutex_lock(&args()->mutex);
+			philo->meals++;
+			philo->last_meal = (get_time() + args()->time_to_die);
+			pthread_mutex_unlock(&args()->mutex);
 			break ;
 		}
-		pthread_mutex_unlock(&philo->args->mutex);
+		if (!check_life())
+			return (0);
+	}	
+	philo->time = get_time() + args()->time_to_eat;	
+	while (get_time() < philo->time)
+	{
+		if (!check_life())			
+			break ;
 	}
-	eat_2(philo);
+	free_fork(philo);
 	return (1);
 }
 
-int	eat_2(t_philo *philo)
-{
-	if (philo->args->number_of_philosophers > 1)
-	{
-		pthread_mutex_unlock(philo->left_fork);
-		pthread_mutex_unlock(&philo->right_fork);
-	}
-	else
-		return (0);
-	return (1);
-}
+

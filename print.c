@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 15:28:12 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/22 19:45:58 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/22 23:11:55 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ int	print_2(t_philo *philo, char *str)
 		pthread_mutex_unlock(&philo->args->mutex);
 		return (0);
 	}
-	printf("%lld %d %s\n", current_time(philo->args), philo->id, str);
 	philo->meals++;
-	philo->last_meal = get_time();
+	printf("%lld %d %s\n", current_time(philo->args), philo->id, str);
 	pthread_mutex_unlock(&philo->args->mutex);
 	return (1);
 }

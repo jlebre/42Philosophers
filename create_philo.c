@@ -24,6 +24,7 @@ void	create_philo(t_args *args)
 		pthread_create(&philo[i].philo, NULL, &routine, &philo[i]);
 		i++;
 	}
-	check_if_dead(philo);
+	while (check_life_all())
+		;
 	destroy_philo(philo, args);
 }

@@ -6,37 +6,70 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:15:28 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/22 19:45:29 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/22 23:33:25 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	check_if_dead(t_philo *philo)
+static void dead_all(int p)
 {
 	int	i;
+	t_philo	*philo;
 
-	while (1)
+	i = 0;
+	
+	pthread_mutex_lock(&args()->mutex_life);
+	args()->died = 1;
+	pthread_mutex_unlock(&args()->mutex_life);
+	return ;
+	while (i < args()->number_of_philosophers)
 	{
-		i = 0;
-		pthread_mutex_lock(&philo->args->mutex);
-		while (i < philo->args->number_of_philosophers && philo->args->died != 1)
-		{
-			if (get_time() - philo->last_meal >= philo->args->time_to_die)
-			{
-				printf("%lld %i died\n", current_time(philo->args), philo->id);
-				philo->args->died = 1;
-				pthread_mutex_unlock(&philo->args->mutex);
-				return ;
-			}
-			if (all_ate(philo) == 0)
-				return ;
-			if (only_one_philosopher(philo) == 0)
-				return ;
-			i++;
-		}
-		pthread_mutex_unlock(&philo->args->mutex);
+		philo = &args()->philos[i];
+		if (i != p)
+			pthread_detach(philo->philo);
+		i++;
 	}
+}
+
+int check_life(void)
+{
+	int i;
+
+	pthread_mutex_lock(&args()->mutex_life);
+	i = args()->died;
+	pthread_mutex_unlock(&args()->mutex_life);
+	return (!i);
+}
+
+int check_life_all(void)
+{
+	int 	is_dead;
+	int		i;
+	t_philo	*philo;
+	int		is;
+
+	is_dead = 0;
+	i = 0;
+	is = 0;
+	pthread_mutex_lock(&args()->mutex);
+	while (i < args()->number_of_philosophers && args()->died != 1 && !is_dead)
+	{
+		philo = &args()->philos[i];
+		if (get_time() > philo->last_meal)
+		{
+			printf("%lld %i died\n", current_time(philo->args), philo->id);
+			is_dead++;
+		}
+		if (args()->number_of_meals >= 0)
+			is += (philo->meals >= args()->number_of_meals);
+		i++;
+	}
+	is_dead += (is ==  args()->number_of_philosophers);
+	if (is_dead > 0)
+		dead_all(i);
+	pthread_mutex_unlock(&args()->mutex);
+	return (is_dead == 0);
 }
 
 int	all_ate(t_philo *philo)
@@ -49,23 +82,17 @@ int	all_ate(t_philo *philo)
 		&& philo[i].meals >= philo->args->number_of_meals)
 		i++;
 	if (i == philo->args->number_of_philosophers)
-	{
 		philo->args->died = 1;
-		pthread_mutex_unlock(&philo->args->mutex);
-		return (0);
-	}
-	return (1);
+	return (philo->args->died);
 }
 
-int	only_one_philosopher(t_philo *philo)
+int	only_one_philosopher(void)
 {
-	if (philo->args->number_of_philosophers == 1)
+	if (args()->number_of_philosophers == 1)
 	{
-		usleep(philo->args->time_to_die * 1000);
-		printf("%lld %i died\n", current_time(philo->args), philo->id);
-		philo->args->died = 1;
-		pthread_mutex_unlock(&philo->args->mutex);
-		return (0);
+		usleep(args()->time_to_die * 1000);
+		printf("%lld %i died\n", current_time(args()), 1);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
