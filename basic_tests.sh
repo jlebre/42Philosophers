@@ -5,7 +5,36 @@ sleep 1
 clear
 echo "\033[0;32mSTARTING TESTS\n"
 sleep 1
+echo "ERROR HANDLING\n"
 echo "\nTest 1:"
+echo "\nPassing a letter as argument!\n\033[0m"
+sleep 3
+./philo 5 800 a 200
+sleep 1
+echo "\033[0;32m\nTest 2:"
+echo "\nPassing a negative number as argument!\n\033[0m"
+sleep 3
+./philo 5 800 -300 200
+sleep 1
+echo "\033[0;32m\nTest 3:"
+echo "\nPassing no argument!\n\033[0m"
+sleep 3
+./philo
+sleep 1
+echo "\033[0;32m\nTest 4:"
+echo "\nPassing 6 arguments!\n\033[0m"
+sleep 3
+./philo 5 800 200 200 6 100 
+sleep 1
+echo "\033[0;32m\nTest 5:"
+echo "\nPassing 2 arguments!\n\033[0m"
+sleep 3
+./philo 5 800
+sleep 1
+echo "\033[0;32m\n\nError Tests completed!\n\033[0m"
+sleep 1
+clear
+echo "\033[0;32m\nTest 1:"
 echo "1 Philosopher"
 echo "Time to die 800ms"
 echo "Time to eat 200ms"
