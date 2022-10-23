@@ -73,7 +73,6 @@ int					check_life(void);
 int					check_life_all(void);
 int					all_ate(t_philo *philo);
 int					only_one_philosopher(void);
-static void			dead_all(int p);
 
 //START ARGS
 t_args				*args(void);
