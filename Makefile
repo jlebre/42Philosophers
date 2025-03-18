@@ -18,8 +18,12 @@ NAME = philo
 
 INCLUDE = .
 
-SRC = main.c check.c start_args.c create_philo.c check_if_dead.c print.c \
+FILE = main.c check.c start_args.c create_philo.c check_if_dead.c print.c \
 	destroy_philo.c routine.c colors.c utils.c time.c check_fork.c eat.c
+
+SRCS_DIR = srcs
+
+SRC = $(addprefix $(SRCS_DIR)/, $(FILE))
 
 OBJ = $(SRC:.c=.o)
 

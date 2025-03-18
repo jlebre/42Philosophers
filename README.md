@@ -75,5 +75,21 @@ The **Dining Philosophers** problem consists of philosophers sitting at a table 
 
 ---
 
+## 🔗 Some links I used
+
+### Threads 
+-[1](https://www.geeksforgeeks.org/thread-in-operating-system/)  
+-[2](https://www.thegeekstuff.com/2012/03/linux-threads-intro/)  
+-[3](https://iq.opengenus.org/linux-thread-creation-data-passing-waiting/#:~:text=Linux%20threads%3A%20Creation%2C%20Data%20passing%2C%20Waiting%201%20Introduction.,Attributes.%20...%206%20Summary.%20...%207%20References.%20)  
+
+### Mutex 
+-[4](https://www.delftstack.com/howto/c/mutex-in-c/) 
+-[5](https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/) 
+
+### GETTIMEOFDAY  
+-[6](https://linuxhint.com/gettimeofday_c_language/)
+
+---
+
 ![image](https://github.com/user-attachments/assets/63c3e497-38e6-4582-8b1d-2bdbc13970c8)
 
