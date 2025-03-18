@@ -55,6 +55,8 @@ This runs a simulation with **5 philosophers**, where:
 
 ## 🧑‍🏫 Understanding the Problem
 
+![dining-philosopher-problem-using-semaphores-1-1643507259](https://github.com/user-attachments/assets/2573b3fb-6fef-41c4-a40f-42e42e288a5a)
+
 The **Dining Philosophers** problem consists of philosophers sitting at a table with one fork between each of them. Each philosopher needs two forks to eat but can only pick up one fork at a time. The challenge is to prevent deadlocks and starvation.
 
 ### 💡 Key Challenges
@@ -75,19 +77,28 @@ The **Dining Philosophers** problem consists of philosophers sitting at a table 
 
 ---
 
+## 🧪 Tester
+
+Just run
+```bash
+./basic_tests.sh
+```
+
+---
+
 ## 🔗 Some links I used
 
 ### Threads 
--[1](https://www.geeksforgeeks.org/thread-in-operating-system/)  
--[2](https://www.thegeekstuff.com/2012/03/linux-threads-intro/)  
--[3](https://iq.opengenus.org/linux-thread-creation-data-passing-waiting/#:~:text=Linux%20threads%3A%20Creation%2C%20Data%20passing%2C%20Waiting%201%20Introduction.,Attributes.%20...%206%20Summary.%20...%207%20References.%20)  
+-[Thread in Operating System](https://www.geeksforgeeks.org/thread-in-operating-system/)  
+-[Introduction to Linux Threads – Part I](https://www.thegeekstuff.com/2012/03/linux-threads-intro/)  
+-[Linux threads: Creation, Data passing, Waiting](https://iq.opengenus.org/linux-thread-creation-data-passing-waiting/#:~:text=Linux%20threads%3A%20Creation%2C%20Data%20passing%2C%20Waiting%201%20Introduction.,Attributes.%20...%206%20Summary.%20...%207%20References.%20)  
 
 ### Mutex 
--[4](https://www.delftstack.com/howto/c/mutex-in-c/) 
--[5](https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/) 
+-[How to Use Mutex Lock in C](https://www.delftstack.com/howto/c/mutex-in-c/)  
+-[Mutex lock for Linux Thread Synchronization](https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/)  
 
 ### GETTIMEOFDAY  
--[6](https://linuxhint.com/gettimeofday_c_language/)
+-[How to use gettimeofday function in C language?](https://linuxhint.com/gettimeofday_c_language/)
 
 ---
 
