@@ -10,6 +10,8 @@ This project is an introduction to multithreading and process synchronization.
 
 The goal is to solve the classic **Dining Philosophers** problem using **threads**, **mutexes**, and **semaphores** in C.
 
+📜 To see the project subject, [click here](https://github.com/jlebre/42Philosophers/blob/main/philo.pdf)!
+
 ---
 
 ## 📂 Important Files
@@ -18,15 +20,7 @@ The goal is to solve the classic **Dining Philosophers** problem using **threads
 
 🔹 To see the `Makefile`, [click here](https://github.com/jlebre/42Philosophers/blob/main/Makefile)!
 
-🔹 [Main Function](https://github.com/jlebre/42Philosophers/blob/main/philosophers.c)
-
-🔹 [Thread Management](https://github.com/jlebre/42Philosophers/blob/main/threads.c)
-
-🔹 [Philosopher Actions](https://github.com/jlebre/42Philosophers/blob/main/actions.c)
-
-🔹 [Time Handling](https://github.com/jlebre/42Philosophers/blob/main/time.c)
-
-🔹 [Utility Functions](https://github.com/jlebre/42Philosophers/blob/main/utils.c)
+🔹 [Main Function](https://github.com/jlebre/42Philosophers/blob/main/srcs/main.c)
 
 ---
 
